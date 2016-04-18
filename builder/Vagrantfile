@@ -20,6 +20,8 @@ Vagrant.configure(2) do |config|
       v.memory = 1500
     end
 
+    node.vm.synced_folder "../../", "/vagrant/lain/"
+
     node.vm.network "private_network", ip: "192.168.77.21"
 
     if bdp
@@ -28,11 +30,11 @@ Vagrant.configure(2) do |config|
         inline: "echo CreditEase bdp env detected, provisioning..."
 
       node.vm.provision "file",
-        source: "playbooks/roles/bdp/files",
+        source: "../../playbooks/roles/bdp/files",
         destination: "/tmp/bdp-files"
 
       node.vm.provision "shell",
-        inline: "/vagrant/bootstrap -r docker.bdp.cc:5002 --virtual-ips=192.168.77.201,192.168.77.202,192.168.77.203"
+        inline: "/vagrant/lain/bootstrap -r docker.bdp.cc:5002 --virtual-ips=192.168.77.201,192.168.77.202,192.168.77.203"
 
     end
 
