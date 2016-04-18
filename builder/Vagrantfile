@@ -34,6 +34,10 @@ Vagrant.configure(2) do |config|
         destination: "/tmp/bdp-files"
 
       node.vm.provision "shell",
+        path: "../../setup-for-crediteasebdp",
+        args: "/tmp/bdp-files"
+
+      node.vm.provision "shell",
         inline: "/vagrant/lain/bootstrap -r docker.bdp.cc:5002 --virtual-ips=192.168.77.201,192.168.77.202,192.168.77.203"
 
     end
