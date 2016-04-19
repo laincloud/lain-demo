@@ -26,9 +26,9 @@
   - name: Ensure health statuses of vital services
     service: name={{ item }} state=restarted
     with_items:
+      - etcd
       - lainlet
       - networkd
-      - etcd
 
   - name: Bring auxiliary containers back to life, if we can
     command: docker start {{ item }}
