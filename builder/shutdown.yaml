@@ -1,0 +1,34 @@
+# vim: ft=ansible:
+---
+- hosts: all
+  remote_user: vagrant
+  become: yes
+  become_user: root
+
+  vars:
+    - lainlet_api: "http://lainlet.lain:9001/v2/containers"
+
+  tasks:
+
+  - name: Query Lainlet for layer 1 container list
+    command: curl {{ lainlet_api }}
+    register: lainlet_output
+    changed_when: False
+
+  - set_fact:
+      container_list: "{{ lainlet_output.stdout | from_json }}"
+
+  - name: Stop all layer 1 containers
+    command: docker stop {{ item.key.split('/')[1] }}
+    with_dict: "{{ container_list }}"
+
+  - name: Stop all layer 0 containers
+    service: name={{ item }} state=stopped
+    with_items:
+      - rebellion
+      - swarm-agent
+      - swarm-manager
+
+  - name: Shut down Docker Daemon
+    service: name=docker state=stopped
+...
