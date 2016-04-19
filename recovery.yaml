@@ -30,7 +30,7 @@
       - lainlet
       - networkd
 
-  - name: Bring auxiliary containers back to life, if we can
+  - name: Bring auxiliary containers back to life, if I can
     command: docker start {{ item }}
     with_items:
       - "{{ tinydns_container_name }}"
@@ -39,8 +39,12 @@
       - "{{ console_container_name }}"
     ignore_errors: True
 
+  - debug: msg"Now I would try to bring deploy back to life. I would keep retrying for up to 5 times."
+
   - name: Bring deploy back to life
     command: docker start {{ deploy_container_name }}
+    retries: 5
+    delay: 10
 
   - debug: msg="Recovery operation finished, deploy will bring remaining containers (if any) back to life one by one, check `docker ps -a` for progress."
 ...
