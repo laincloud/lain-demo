@@ -18,8 +18,9 @@ Vagrant.configure(2) do |config|
 
     lain_demo.vm.network "private_network", ip: "192.168.77.21"
 
-    config.vm.provision "ansible" do |ansible|
+    config.vm.provision "ansible_local" do |ansible|
       ansible.playbook = "recovery.yaml"
+      ansible.install = false
     end
 
   end
