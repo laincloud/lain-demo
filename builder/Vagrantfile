@@ -8,12 +8,7 @@ Vagrant.configure(2) do |config|
 
   config.vm.define "lain_demo" do |node|
 
-    node.vm.box = "laincloud/centos"
-    node.vm.box_url = [
-      "http://10.106.170.108/centos-lain-1460463851.box",
-    ]
-    node.vm.box_download_checksum_type = 'sha256'
-    node.vm.box_download_checksum = '0242a6b1d6bbbba7a7ab3f5ffa5deaf3784be0fdd4e67ad3ab7dc9a8835a1199'
+    node.vm.box = "laincloud/centos-lain"
     node.vm.hostname = "lain-demo"
 
     node.vm.provider "virtualbox" do |v|
