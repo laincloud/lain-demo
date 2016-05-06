@@ -8,7 +8,7 @@ Vagrant.configure(2) do |config|
     lain_demo.vm.hostname = "lain-demo"
 
     lain_demo.vm.provider "virtualbox" do |v|
-      v.memory = 1024
+      v.memory = 2048
     end
 
     lain_demo.vm.network "private_network", ip: "192.168.77.21"
