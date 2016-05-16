@@ -1,0 +1,3 @@
+[submodule "builder/lain"]
+	path = builder/lain
+	url = https://github.com/laincloud/lain.git
