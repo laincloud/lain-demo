@@ -12,3 +12,10 @@ Get a LAIN node up and running in 2 minutes[1]!
 
 
 [1]: The duration depends on your connection to [vagrantcloud.com](https://vagrantcloud.com/laincloud/).
+
+## laincloud/lain-demo 的打包过程
+
+```
+cd builder/
+./build.sh
+```
